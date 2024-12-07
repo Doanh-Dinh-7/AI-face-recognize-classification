@@ -74,7 +74,7 @@ class FaceRecognition:
             # Chạy lệnh align_dataset_mtcnn.py
             print("\n[INFO] Chạy lệnh align_dataset_mtcnn.py...")
             align_command = [
-                "python", 
+                r"D:\Python\AI-recognize-traffic-signs-classification\venv\Scripts\python", #Thay đổi đường dẫn file môi trường
                 "src/align_dataset_mtcnn.py", 
                 raw_path, 
                 process_path, 
@@ -89,7 +89,7 @@ class FaceRecognition:
             # Chạy lệnh classifier.py
             print("\n[INFO] Chạy lệnh classifier.py...")
             classifier_command = [
-                "python", 
+                r"D:\Python\AI-recognize-traffic-signs-classification\venv\Scripts\python", #Thay đổi đường dẫn file môi trường
                 "src/classifier.py", 
                 "TRAIN", 
                 process_path, 
@@ -111,7 +111,8 @@ class FaceRecognition:
         """
         print("[INFO] Bắt đầu quá trình nhận diện khuôn mặt.")
         raw_path = self.capture_face_images(face_id)
-        process_path = os.path.join(self.save_path, "process")
+        raw_path = "Dataset/FaceData/raw"
+        process_path = "Dataset/FaceData/processed"
         model_path = "Models/20180402-114759.pb"
         classifier_output = "Models/facemodel.pkl"
         print("[INFO] Bắt đầu quá trình xử lý khuôn mặt.")
@@ -120,20 +121,26 @@ class FaceRecognition:
     
 # Sử dụng class
 if __name__ == "__main__":
-    save_path = r"D:\Python\MiAI_FaceRecog_3\Dataset\FaceData\raw"
-    raw_path = "FaceData/raw"
-    process_path = "FaceData/process"
+    # Cấu hình các tham số đầu vào cho quá trình nhận diện khuôn mặt
+    save_path = r"D:\Python\AI-recognize-traffic-signs-classification\Dataset\FaceData\raw" #Thay đổi đường dẫn file lưu RAW
+    raw_path = "Dataset/FaceData/raw"
+    process_path = "Dataset/FaceData/processed"
     model_path = "Models/20180402-114759.pb"
     classifier_output = "Models/facemodel.pkl"
     face_recog = FaceRecognition(save_path)
 
-    face_id = "221121514116"  # Mã sinh viên (face_id)
+    face_id = "221121514117"  # Mã sinh viên (face_id)
     final_path = face_recog.execute(face_id)
     print(f"[INFO] Dữ liệu xử lý đã lưu tại: {final_path}")
 
 
+# python src/face_rec_cam.py Để bật cam test
+
+
 # python src/align_dataset_mtcnn.py  Dataset/FaceData/raw Dataset/FaceData/processed --image_size 160 --margin 32  --random_order --gpu_memory_fraction 0.25
-# python src/classifier.py TRAIN FaceData/process Models/20180402-114759.pb Models/facemodel.pkl --batch_size 1000
+# python src/classifier.py TRAIN Dataset/FaceData/processed Models/20180402-114759.pb Models/facemodel.pkl --batch_size 1000
+
+
 
 # students/face_recog/
 
