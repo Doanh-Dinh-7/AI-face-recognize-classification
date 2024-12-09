@@ -142,7 +142,6 @@ if __name__ == "__main__":
 
 
 
-# students/face_recog/
 
 
 
